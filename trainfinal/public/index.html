@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Train Reservation | Login</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div class="auth-wrapper">
+      <div class="auth-left">
+        <div class="brand">
+          <div class="brand-logo">TR</div>
+          <div class="brand-name">Train Reservation 2.0</div>
+        </div>
+
+        <div>
+          <h1 class="hero-title">
+            Upgrade your <span>IRCTC-style</span> booking experience.
+          </h1>
+          <p class="hero-subtitle">
+            Search trains, manage carts, complete payments, and review booking &
+            transaction history — all in one advanced dashboard.
+          </p>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="value">5000+</div>
+              <div class="label">Daily seats simulated</div>
+            </div>
+            <div class="stat">
+              <div class="value">99.9%</div>
+              <div class="label">Mock uptime</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 0.8rem; color: #6b7280; margin-top: 40px;">
+          Demo project • Node.js + MongoDB • No external API or Postman required
+        </div>
+      </div>
+
+      <div class="auth-right">
+        <div class="card">
+          <h2>Welcome back</h2>
+          <p>Sign in with your email or create a new travel account.</p>
+
+          <div class="tabs">
+            <button id="tab-login" class="tab active">Login</button>
+            <button id="tab-register" class="tab">Create account</button>
+          </div>
+
+          <!-- LOGIN FORM -->
+          <form id="loginForm">
+            <div class="form-group">
+              <div class="label-row">
+                <label for="loginEmail">Email</label>
+              </div>
+              <input id="loginEmail" type="email" placeholder="you@example.com" />
+              <div id="loginEmailError" class="error-text"></div>
+            </div>
+
+            <div class="form-group">
+              <div class="label-row">
+                <label for="loginPassword">Password</label>
+              </div>
+              <input
+                id="loginPassword"
+                type="password"
+                placeholder="••••••••"
+              />
+              <div id="loginPasswordError" class="error-text"></div>
+            </div>
+
+            <div id="loginError" class="error-text"></div>
+
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+
+          <!-- REGISTER FORM -->
+          <form id="registerForm" style="display: none;">
+            <div class="form-group">
+              <div class="label-row">
+                <label for="regName">Full name</label>
+              </div>
+              <input id="regName" type="text" placeholder="Chandan Reddy" />
+              <div id="regNameError" class="error-text"></div>
+            </div>
+
+            <div class="form-group">
+              <div class="label-row">
+                <label for="regEmail">Email</label>
+              </div>
+              <input id="regEmail" type="email" placeholder="you@example.com" />
+              <div id="regEmailError" class="error-text"></div>
+            </div>
+
+            <div class="form-group">
+              <div class="label-row">
+                <label for="regPassword">Password</label>
+                <span class="helper">At least 6 characters</span>
+              </div>
+              <input
+                id="regPassword"
+                type="password"
+                placeholder="Choose a strong password"
+              />
+              <div id="regPasswordError" class="error-text"></div>
+            </div>
+
+            <div id="registerError" class="error-text"></div>
+
+            <button type="submit" class="btn btn-primary">
+              Create account
+            </button>
+          </form>
+
+          <button id="demoBtn" class="btn btn-ghost">Use demo credentials</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/api.js"></script>
+    <script src="./js/auth.js"></script>
+  </body>
+</html>

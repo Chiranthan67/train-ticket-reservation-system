@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Train Reservation | Dashboard</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div class="dashboard-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-logo">TR</div>
+          <div class="brand-name">Train Reservation 2.0</div>
+        </div>
+        <div class="menu">
+          <button class="menu-btn active" data-section="searchSection">
+            🔍 Search Trains
+          </button>
+          <button class="menu-btn" data-section="cartSection">
+            🛒 Cart & Payment
+          </button>
+          <button class="menu-btn" data-section="bookingsSection">
+            🎫 My Bookings
+          </button>
+          <button class="menu-btn" data-section="transactionsSection">
+            💳 Transactions
+          </button>
+          <button class="menu-btn" data-section="adminSection" id="adminMenuBtn" style="display:none;">
+            👑 Admin Panel
+          </button>
+          <button id="logoutBtn" class="menu-btn">🚪 Logout</button>
+        </div>
+        <div class="sidebar-footer">
+          Logged in as <span id="sidebarUserEmail">user@example.com</span>
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="main-header">
+          <div>
+            <h2 style="margin: 0 0 4px;">IRCTC-style advanced dashboard</h2>
+            <p style="margin: 0; font-size: 0.85rem; color: #9ca3af;">
+              Manage your complete journey: search, cart, payment and history.
+            </p>
+          </div>
+          <div class="user-chip">
+            <span id="chipUserName">User</span> •
+            <span id="chipUserEmail">email</span>
+          </div>
+        </div>
+
+        <!-- SEARCH SECTION -->
+        <section id="searchSection" class="section active">
+          <div class="card" style="max-width: 100%;">
+            <h3>Search trains</h3>
+            <p style="font-size: 0.85rem; color: #9ca3af;">
+              Select source, destination and journey date.
+            </p>
+
+            <div class="form-group">
+              <label for="sourceInput">From</label>
+              <select id="sourceInput">
+                <option value="">Select source station</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="destinationInput">To</label>
+              <select id="destinationInput">
+                <option value="">Select destination station</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="dateInput">Journey date</label>
+              <input id="dateInput" type="date" />
+            </div>
+
+            <button id="searchBtn" class="btn btn-primary">Search</button>
+            <div
+              id="searchError"
+              class="error-text"
+              style="margin-top: 6px;"
+            ></div>
+          </div>
+
+          <div style="margin-top: 18px;">
+            <h3>Available trains</h3>
+            <div id="trainList" class="train-grid"></div>
+          </div>
+        </section>
+
+        <!-- CART & PAYMENT SECTION -->
+        <section id="cartSection" class="section">
+          <div class="card" style="max-width: 100%;">
+            <h3>Cart & payment</h3>
+            <p style="font-size: 0.85rem; color: #9ca3af;">
+              Review selected train, add passengers, choose coach & seat and
+              complete payment.
+            </p>
+
+            <div
+              id="cartTrainDetails"
+              style="margin-bottom: 14px; font-size: 0.85rem;"
+            ></div>
+
+            <h4 style="margin-bottom: 8px;">Passengers</h4>
+            <table class="table" id="passengerTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Age</th>
+                  <th>Gender</th>
+                  <th>Coach / Seat</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+            <button
+              id="addPassengerBtn"
+              class="btn btn-ghost"
+              style="width: auto;"
+            >
+              + Add passenger
+            </button>
+
+            <div style="margin-top: 16px;">
+              <label for="paymentMethod">Payment method</label>
+              <select id="paymentMethod">
+                <option value="CARD">Card</option>
+                <option value="UPI">UPI (mock)</option>
+                <option value="NET_BANKING">Net Banking (mock)</option>
+              </select>
+            </div>
+
+            <div class="form-group" id="cardNumberGroup">
+              <label for="cardNumber">Card number</label>
+              <input
+                id="cardNumber"
+                type="text"
+                placeholder="1234 5678 9012 3456"
+              />
+            </div>
+
+            <div style="margin-top: 8px; font-size: 0.9rem;">
+              Total fare:
+              <strong><span id="totalFare">₹0</span></strong>
+            </div>
+
+            <div
+              id="checkoutError"
+              class="error-text"
+              style="margin-top: 6px;"
+            ></div>
+            <button id="checkoutBtn" class="btn btn-primary">
+              Pay & confirm booking
+            </button>
+          </div>
+        </section>
+
+        <!-- BOOKINGS SECTION -->
+        <section id="bookingsSection" class="section">
+          <div class="card" style="max-width: 100%;">
+            <h3>My bookings</h3>
+            <table class="table" id="bookingsTable">
+              <thead>
+                <tr>
+                  <th>Train</th>
+                  <th>From → To</th>
+                  <th>Date</th>
+                  <th>Passengers</th>
+                  <th>Amount</th>
+                  <th>Status / Seats</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- TRANSACTIONS SECTION -->
+        <section id="transactionsSection" class="section">
+          <div class="card" style="max-width: 100%;">
+            <h3>Transaction history</h3>
+            <table class="table" id="transactionsTable">
+              <thead>
+                <tr>
+                  <th>Train</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Method</th>
+                  <th>Masked card</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ADMIN SECTION -->
+        <section id="adminSection" class="section">
+          <div class="card" style="max-width: 100%;">
+            <h3>Admin Panel - All Bookings by Date</h3>
+            <div id="adminBookingsContainer"></div>
+          </div>
+          <div class="card" style="max-width: 100%; margin-top: 20px;">
+            <h3>All Transactions</h3>
+            <div id="adminTransactionsContainer"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- SEAT SELECTION MODAL -->
+    <div id="seatModal" class="seat-modal">
+      <div class="seat-box">
+        <div class="seat-box-header">
+          <h3>Select Compartment & Seats</h3>
+          <button id="seatCloseX" class="seat-close-btn">&times;</button>
+        </div>
+
+        <div class="seat-controls">
+          <label for="seatCoachSelect">Coach:</label>
+          <select id="seatCoachSelect"></select>
+        </div>
+
+        <div class="seat-legend" id="seatLegend">
+          <span>
+            <span class="seat-legend-badge seat-berth-LB"></span> LB
+          </span>
+          <span>
+            <span class="seat-legend-badge seat-berth-MB"></span> MB
+          </span>
+          <span>
+            <span class="seat-legend-badge seat-berth-UB"></span> UB
+          </span>
+          <span>
+            <span class="seat-legend-badge seat-berth-SLB"></span> SLB
+          </span>
+          <span>
+            <span class="seat-legend-badge seat-berth-SUB"></span> SUB
+          </span>
+          <span>
+            <span
+              class="seat-legend-badge"
+              style="background:#111827;border:1px solid #4b5563;"
+            ></span>
+            Reserved / generic
+          </span>
+        </div>
+
+        <div id="seatGrid" class="seat-grid"></div>
+
+        <div class="seat-footer">
+          <div>
+            Selected seat:
+            <strong><span id="seatSelectedLabel">None</span></strong>
+          </div>
+          <div class="seat-footer-buttons">
+            <button id="seatConfirmBtn" class="btn btn-primary">
+              Confirm selected seat
+            </button>
+            <button id="seatCancelBtn" class="btn btn-ghost">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/api.js"></script>
+    <script src="./js/dashboard.js"></script>
+  </body>
+</html>
