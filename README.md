@@ -17,8 +17,8 @@ A full-stack train ticket reservation system with user authentication, train sea
 ## Tech Stack
 
 - **Frontend:** HTML, CSS, JavaScript
-- **Backend:** Node.js/Python
-- **Database:** SQLite
+- **Backend:** Node.js with Express
+- **Database:** MongoDB
 
 ## Installation
 
